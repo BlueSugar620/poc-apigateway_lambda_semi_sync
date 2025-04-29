@@ -1,0 +1,37 @@
+openapi: 3.0.1
+info:
+  title: api
+  description: Sample API
+  version: 0.0.1
+paths:
+  /helloworld:
+    get:
+      description: Return helloworld
+      x-amazon-apigateway-integration:
+        type: AWS_PROXY
+        uri: ${get_helloworld_uri}
+        httpMethod: POST
+        credentials: ${credentials}
+  /plus:
+    post:
+      description: Calculate a + b
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                a:
+                  type: integer
+                  minimum: 0
+                  exclusiveMaximum: 100
+                b:
+                  type: integer
+                  minimum: 0
+                  exclusiveMaximum: 100
+      x-amazon-apigateway-integration:
+        type: AWS_PROXY
+        uri: ${post_plus_uri}
+        httpMethod: POST
+        credentials: ${credentials}
